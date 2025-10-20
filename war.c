@@ -1,52 +1,51 @@
-// ============================================================================
-//         PROJETO WAR ESTRUTURADO - DESAFIO DE CÓDIGO
-// ============================================================================
+//nivel novato
 
 #include <stdio.h>
 #include <string.h>
 
-#define TOTAL_TERRITORIOS 5
-
-// Struct para armazenar os dados de um território
-struct Territorio {
-    char nome[50];
-    char cor[30];
-    int tropas;
-};
+// Definindo a struct Territorio
+// Essa estrutura vai guardar os dados de cada território
+typedef struct {
+    char nome[30];   // Nome do território
+    char cor[10];    // Cor do exército
+    int tropas;      // Quantidade de tropas
+} Territorio;
 
 int main() {
-    struct Territorio territorios[TOTAL_TERRITORIOS];
-    
-    printf("=== Cadastro dos Territórios ===\n");
+    // Criando um vetor com capacidade para 5 territórios
+    Territorio territorios[5];
 
-    // Loop para cadastrar 5 territórios
-    for (int i = 0; i < TOTAL_TERRITORIOS; i++) {
-        printf("\nTerritório %d:\n", i + 1);
-        
-        // Limpar o buffer antes de usar fgets (caso venha do scanf anterior)
-        getchar(); 
+    // Variável auxiliar para controlar o loop
+    int i;
 
+    printf("==== Cadastro de Territórios ====\n");
+
+    // Loop para cadastrar os 5 territórios
+    for (i = 0; i < 5; i++) {
+        printf("\nCadastro do território %d:\n", i + 1);
+
+        // Lendo o nome do território
         printf("Nome do território: ");
-        fgets(territorios[i].nome, sizeof(territorios[i].nome), stdin);
-        territorios[i].nome[strcspn(territorios[i].nome, "\n")] = '\0'; // remover '\n'
+        scanf(" %[^\n]", territorios[i].nome); // lê até a quebra de linha
 
+        // Lendo a cor do exército
         printf("Cor do exército: ");
-        fgets(territorios[i].cor, sizeof(territorios[i].cor), stdin);
-        territorios[i].cor[strcspn(territorios[i].cor, "\n")] = '\0';
+        scanf(" %[^\n]", territorios[i].cor); // lê até a quebra de linha
 
-        printf("Número de tropas: ");
+        // Lendo a quantidade de tropas
+        printf("Quantidade de tropas: ");
         scanf("%d", &territorios[i].tropas);
     }
 
-    // Exibir os dados
-    printf("\n=== Estado Atual do Mapa ===\n");
-    for (int i = 0; i < TOTAL_TERRITORIOS; i++) {
+    // Exibindo os dados cadastrados
+    printf("\n==== Territórios Registrados ====\n");
+
+    for (i = 0; i < 5; i++) {
         printf("\nTerritório %d:\n", i + 1);
         printf("Nome: %s\n", territorios[i].nome);
-        printf("Cor do Exército: %s\n", territorios[i].cor);
-        printf("Número de Tropas: %d\n", territorios[i].tropas);
+        printf("Cor do exército: %s\n", territorios[i].cor);
+        printf("Quantidade de tropas: %d\n", territorios[i].tropas);
     }
 
     return 0;
 }
-
